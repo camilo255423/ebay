@@ -25,6 +25,7 @@ for category in categories:
 
     sql = 'Insert into categories values (?,?,?,?,?)'
     values = (category_id, category_name, category_level, category_best_offer_enabled, category_parent_id)
+
     connection.commit()
     cursor.execute(sql, values)
 
