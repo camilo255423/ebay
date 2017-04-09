@@ -12,7 +12,7 @@ CategoryParentID INTEGER)"""
 class NoCategoryException(Exception):
     pass
 
-class NoDataBase(Exception):
+class NoDataBaseException(Exception):
     pass
 
 class CategoriesDB:
@@ -28,7 +28,7 @@ class CategoriesDB:
                 cursor.execute(SQL_CREATE_TABLE)
         else:
             if not os.path.isfile(file_name):
-                raise NoDataBase("Data base doesn't exist")
+                raise NoDataBaseException("Data base doesn't exist")
             else:
                 self.connection = sqlite3.connect(file_name)
 

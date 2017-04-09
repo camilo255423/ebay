@@ -3,6 +3,8 @@ import sys
 from ebay.persistence import CategoriesDB
 from ebay.request import get_xml_categories
 from ebay.tree_parser import HTMLTree
+from ebay.persistence import NoCategoryException
+from ebay.persistence import NoDataBaseException
 parameter_error = True
 
 if len(sys.argv) > 1:
@@ -14,12 +16,17 @@ if len(sys.argv) > 1:
         parameter_error = False
 
     if sys.argv[1] == '--render' and len(sys.argv) == 3:
-        category_id = int(sys.argv[2])
-        db = CategoriesDB(file_name='ebay3.db', create=False)
-        file_name = str(category_id) + '.html'
-        html_tree = HTMLTree(db)
-        html_tree.to_file(file_name, category_id)
-        db.close()
+        try:
+            category_id = int(sys.argv[2])
+            db = CategoriesDB(file_name='ebay3.db', create=False)
+            file_name = str(category_id) + '.html'
+            html_tree = HTMLTree(db)
+            html_tree.to_file(file_name, category_id)
+            db.close()
+        except NoCategoryException:
+            print("No category with ID:"+str(category_id))
+        except NoDataBaseException:
+            print("No Database file")
         parameter_error = False
 
 
