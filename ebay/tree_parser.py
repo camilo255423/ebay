@@ -37,7 +37,7 @@ class HTMLTree:
                 string += line
         return string
 
-    def to_file(self, file='1.html', category_root_id=1, template_file="template.html"):
+    def to_file(self, file='1.html', category_root_id=1, template_file="templates/template.html"):
         if not self.db.exist_category(category_root_id):
             raise NoCategoryException("Category doesn't exist")
         file_name = '{}.html'.format(category_root_id)
