@@ -24,10 +24,10 @@ class HTMLTree:
 
     def get_html_node(self, category):
         document = ""
-        document += " ID: "+str(category[0])
-        document += " Name: " + str(category[1])
-        document += " Level: " + str(category[2])
-        document += " BestOfferEnabled: " + str(category[3])
+        document += "<span class='categoryId'>ID: "+str(category[0])+"</span>"
+        document += "<span class='categoryName'> Name: " + str(category[1])+"</span>"
+        document += "<span class='categoryLevel'> Level: " + str(category[2])+"</span>"
+        document += "<span class='categoryBestOffer'> BestOfferEnabled: " + str(category[3])+"</span>"
         return document
 
     def load_template(self, file_name):

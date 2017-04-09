@@ -20,6 +20,15 @@ h1 { font-size: large }
 
 a img { border: none; }
 
-idCategorie{
-   color: red
+.categoryId{
+   color: #be1f1f;
+}
+.categoryName{
+   color: #3f3f90;
+}
+.categoryLevel{
+   color: #ff6500;
+}
+.categoryBestOffer{
+   color: #174f0f;
 }
