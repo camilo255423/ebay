@@ -9,6 +9,11 @@ CategoryLevel INTEGER,
 BestOfferEnabled TEXT,
 CategoryParentID INTEGER)"""
 
+class NoCategoryException(Exception):
+    pass
+
+class NoDataBase(Exception):
+    pass
 
 class CategoriesDB:
     def __init__(self, file_name='ebay.db', create=True):
@@ -23,7 +28,7 @@ class CategoriesDB:
                 cursor.execute(SQL_CREATE_TABLE)
         else:
             if not os.path.isfile(file_name):
-                raise Exception("Data base doesn't exist")
+                raise NoDataBase("Data base doesn't exist")
             else:
                 self.connection = sqlite3.connect(file_name)
 
@@ -60,7 +65,12 @@ class CategoriesDB:
     def exist_category(self, category_id):
         cursor = self.connection.cursor()
         cursor.execute('SELECT * FROM categories where CategoryID=?', (category_id,))
-        return len(cursor.fetchall()) > 0 
+        return len(cursor.fetchall()) > 0
+
+    def get_category_by_id(self, category_id):
+        cursor = self.connection.cursor()
+        cursor.execute('SELECT * FROM categories where CategoryID=?', (category_id,))
+        return cursor.fetchone()
     
     def close(self):
         self.connection.close()
